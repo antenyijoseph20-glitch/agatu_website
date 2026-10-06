@@ -22,7 +22,6 @@ CHAIRMAN_INFO = {
     ]
 }
 
-# 2. Flagship projects list
 PROJECTS = [
     {
         "id": 1,
@@ -30,6 +29,7 @@ PROJECTS = [
         "location": "Obagaji, Agatu LGA",
         "category": "Education & Digital Literacy",
         "status": "Under Construction",
+        "stage": "Stage 2: Superstructure & Roof Level",
         "description": "A modern Computer-Based Test facility providing UTME/JAMB exam registration and digital skills training locally for Agatu youth.",
         "image": "jamb_cbt_centre.jpg"
     },
@@ -39,6 +39,7 @@ PROJECTS = [
         "location": "Agatu LGA, Benue State",
         "category": "Transportation & Trade",
         "status": "Under Construction",
+        "stage": "Stage 2: Structural Frame & Masonry",
         "description": "Integrated transit terminal featuring ticketing offices, passenger lounges, mechanic bays, mini pharmacy, and commercial shop stalls.",
         "image": "bus_terminal.jpg"
     },
@@ -48,6 +49,7 @@ PROJECTS = [
         "location": "Obagaji, Agatu LGA",
         "category": "Youth Welfare & Housing",
         "status": "Under Construction",
+        "stage": "Stage 2: Blockwork & Facility Layout",
         "description": "Secure residential compound for National Youth Service Corps members posted to Agatu LGA, equipped with integrated retail shops.",
         "image": "nysc_corpers_lodge.jpg"
     },
@@ -57,6 +59,7 @@ PROJECTS = [
         "location": "Agatu LGA, Benue State",
         "category": "Basic Education Infrastructure",
         "status": "Ongoing Project",
+        "stage": "Stage 1: Renovation & Structure Rehabilitation",
         "description": "Upgraded educational facility aimed at improving foundational learning, pupil safety, and educational standards across local wards.",
         "image": "primary_school.jpg"
     },
@@ -65,7 +68,8 @@ PROJECTS = [
         "title": "Civic & Administrative Foundation Works",
         "location": "Obagaji Secretariat Grounds",
         "category": "Civil & Earthworks",
-        "status": "Active Excavation & Site Works",
+        "status": "Active Site Works",
+        "stage": "Stage 1: Excavation & Foundation Trenching",
         "description": "Ongoing excavation, trenching, and foundation laying for essential council offices and civic facilities.",
         "image": "site_foundation.jpg"
     }
