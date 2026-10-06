@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agatu LGA - Official Executive Portal</title>
+    <!-- Bootstrap 5 CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- Header Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <div>
+                    <div class="fw-bold fs-5">AGATU LOCAL GOVERNMENT AREA</div>
+                    <small class="text-white-50 d-block" style="font-size: 0.75rem;">OFFICIAL EXECUTIVE PORTAL</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto fw-semibold">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/projects">Projects & Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Secretariat</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dynamic Content -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 Agatu Local Government Council, Benue State. All Rights Reserved.</p>
+            <small class="text-white-50">Office of the Executive Chairman — Hon. (Amb.) Melvin James Ejeh</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

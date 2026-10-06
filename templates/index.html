@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 1. Hero Frontline Section -->
+<section class="hero-banner text-white py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #0b3d26 0%, #165b37 50%, #082819 100%);">
+    <div class="container py-lg-4">
+        <div class="row align-items-center g-4">
+            <!-- Left Text Content -->
+            <div class="col-lg-7 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center bg-warning text-dark fw-bold px-3 py-1 rounded-pill mb-3 shadow-sm fs-6">
+                    <i class="bi bi-patch-check-fill me-2"></i> Official Portal of Agatu LGA
+                </div>
+                
+                <h1 class="display-3 fw-extrabold text-white mb-2 tracking-tight">
+                    {{ info.name }}
+                </h1>
+                
+                <p class="fs-4 text-light fw-medium mb-1">
+                    {{ info.title }}
+                </p>
+                <p class="fs-6 text-warning fw-semibold mb-4">
+                    <i class="bi bi-award-fill me-1"></i> {{ info.secondary_title }}
+                </p>
+
+                <p class="lead text-light opacity-90 mb-4 me-lg-4">
+                    {{ info.bio_summary }}
+                </p>
+                
+                <div class="p-3 bg-white bg-opacity-10 border-start border-4 border-warning rounded-3 mb-4 shadow-sm backdrop-blur">
+                    <i class="bi bi-quote text-warning fs-3 d-block mb-1"></i>
+                    <p class="fst-italic text-white mb-0 fs-6 fw-medium">
+                        "{{ info.motto }}"
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="#flagship-projects" class="btn btn-warning btn-lg fw-bold px-4 py-3 rounded-3 shadow">
+                        <i class="bi bi-building-fill-check me-2"></i> View Achievements
+                    </a>
+                    <a href="/about" class="btn btn-outline-light btn-lg fw-semibold px-4 py-3 rounded-3">
+                        <i class="bi bi-person-lines-fill me-2"></i> Chairman Profile
+                    </a>
+                    <a href="/contact" class="btn btn-success btn-lg fw-semibold px-4 py-3 rounded-3 border-light">
+                        <i class="bi bi-envelope-fill me-2"></i> Secretariat Contact
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Official Chairman Picture -->
+            <div class="col-lg-5 text-center">
+                <div class="position-relative d-inline-block">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-warning rounded-4 transform-rotate-3 opacity-25"></div>
+                    <img src="{{ url_for('static', filename='images/chairman.jpg') }}" 
+                         alt="{{ info.name }}" 
+                         class="img-fluid rounded-4 shadow-lg border border-4 border-warning position-relative" 
+                         style="max-height: 480px; width: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Governance Impact Metrics -->
+<section class="py-4 bg-dark text-white border-top border-bottom border-warning">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <h2 class="display-5 fw-bold text-warning mb-0">5+</h2>
+                <p class="text-white-50 mb-0 fw-semibold">Flagship Projects</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="display-5 fw-bold text-warning mb-0">10</h2>
+                <p class="text-white-50 mb-0 fw-semibold">Council Wards</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="display-5 fw-bold text-warning mb-0">100%</h2>
+                <p class="text-white-50 mb-0 fw-semibold">Youth & NYSC Support</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h2 class="display-5 fw-bold text-warning mb-0">24/7</h2>
+                <p class="text-white-50 mb-0 fw-semibold">Security & Peace Drive</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. Key Flagship Projects Section -->
+<section id="flagship-projects" class="py-5 bg-light">
+    <div class="container py-3">
+        <div class="text-center mb-5 max-w-700 mx-auto">
+            <span class="badge bg-success px-3 py-2 fs-6 mb-2">Transformational Leadership</span>
+            <h2 class="display-6 fw-bold text-dark">Key Infrastructure Projects & Achievements</h2>
+            <p class="text-muted lead">
+                Delivering modern infrastructure, digital education, transportation hubs, and youth welfare in Agatu LGA.
+            </p>
+        </div>
+
+        <!-- Dynamic Projects Grid -->
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-top transition-all">
+                    <!-- Project Image with Status Badge -->
+                    <div class="position-relative">
+                        <img src="{{ url_for('static', filename='images/' + project.image) }}" 
+                             class="card-img-top" 
+                             alt="{{ project.title }}" 
+                             style="height: 240px; object-fit: cover;">
+                        <span class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-warning fw-bold px-3 py-1 m-3 rounded-pill fs-7 border border-warning">
+                            {{ project.status }}
+                        </span>
+                    </div>
+
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge bg-success bg-opacity-10 text-success fw-bold px-2 py-1 rounded">
+                                {{ project.category }}
+                            </span>
+                        </div>
+                        
+                        <h4 class="card-title fw-bold text-dark mb-2 h5">
+                            {{ project.title }}
+                        </h4>
+                        
+                        <p class="small text-muted mb-3">
+                            <i class="bi bi-geo-alt-fill text-danger me-1"></i> {{ project.location }}
+                        </p>
+                        
+                        <p class="card-text text-secondary mb-4 flex-grow-1">
+                            {{ project.description }}
+                        </p>
+
+                        <button class="btn btn-outline-success fw-bold w-100 rounded-3 mt-auto" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#projectModal{{ project.id }}">
+                            <i class="bi bi-info-circle me-1"></i> View Details & Photo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Each Project -->
+            <div class="modal fade" id="projectModal{{ project.id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content rounded-4 border-0">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-header-title fw-bold mb-0">{{ project.title }}</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-4">
+                            <img src="{{ url_for('static', filename='images/' + project.image) }}" 
+                                 class="img-fluid rounded-3 mb-3 w-100 shadow-sm" 
+                                 alt="{{ project.title }}" style="max-height: 400px; object-fit: cover;">
+                            <div class="mb-3">
+                                <span class="badge bg-success me-2">{{ project.category }}</span>
+                                <span class="badge bg-warning text-dark">{{ project.status }}</span>
+                            </div>
+                            <p class="fw-semibold text-danger"><i class="bi bi-geo-alt-fill"></i> Location: {{ project.location }}</p>
+                            <p class="text-secondary fs-6">{{ project.description }}</p>
+                        </div>
+                        <div class="modal-footer bg-light">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="/projects" class="btn btn-success btn-lg fw-bold px-5 py-3 rounded-pill shadow">
+                Explore All Projects & Photo Gallery <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 4. Administrative Pillars Showcase -->
+<section class="py-5 bg-white">
+    <div class="container py-3">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="badge bg-warning text-dark fw-bold px-3 py-2 mb-2">Governance Strategy</span>
+                <h2 class="display-6 fw-bold text-dark mb-3">Key Pillars of Hon. Melvin James Ejeh's Administration</h2>
+                <p class="text-muted mb-4">
+                    Committed to holistic development, youth empowerment, digital accessibility, and local safety across Agatu Local Government Area.
+                </p>
+                
+                <div class="d-flex flex-column gap-3">
+                    {% for pillar in info.pillars %}
+                    <div class="d-flex align-items-start p-3 bg-light rounded-3 border-start border-4 border-success">
+                        <i class="bi bi-check-circle-fill text-success fs-4 me-3 mt-1"></i>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark fs-6">{{ pillar }}</h6>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <div class="card border-0 shadow-lg bg-success text-white rounded-4 p-4 text-start">
+                    <h3 class="fw-bold text-warning mb-3"><i class="bi bi-building"></i> Agatu LGA Secretariat</h3>
+                    <p class="mb-2"><strong>Location:</strong> Secretariat Headquarters, Obagaji, Agatu LGA, Benue State.</p>
+                    <p class="mb-2"><strong>Focus Wards:</strong> Obagaji, Egbe, Okokolo, Odugbeho, Usha, Oshigbudu, and all local communities.</p>
+                    <p class="mb-4"><strong>State Alignment:</strong> Operating in alignment with Benue State Executive Governor Rev. Fr. Dr. Hyacinth Alia.</p>
+                    
+                    <hr class="border-warning opacity-50">
+                    
+                    <a href="/contact" class="btn btn-warning text-dark fw-bold w-100 py-2 rounded-3">
+                        Submit Official Feedback or Query
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom Styling for Interactive Elements -->
+<style>
+    .hover-top:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.15)!important;
+    }
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+    .fs-7 {
+        font-size: 0.8rem;
+    }
+</style>
+{% endblock %}

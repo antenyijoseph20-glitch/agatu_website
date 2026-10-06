@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-5 text-center mb-4 mb-lg-0">
+            <img src="{{ url_for('static', filename='images/chairman.jpg') }}" alt="{{ info.name }}" 
+                 class="img-fluid rounded-4 shadow-lg border border-4 border-success" 
+                 style="max-height: 460px; width: 100%; object-fit: cover;">
+        </div>
+        <div class="col-lg-7">
+            <span class="badge bg-success mb-2 px-3 py-2 fs-6">Executive Profile</span>
+            <h1 class="fw-bold text-dark mb-1">{{ info.name }}</h1>
+            <h5 class="text-success fw-semibold mb-2">{{ info.title }}</h5>
+            <p class="text-muted fw-bold mb-4">{{ info.secondary_title }}</p>
+
+            <p class="lead text-secondary">{{ info.bio_summary }}</p>
+            
+            <div class="p-3 bg-white border-start border-4 border-success shadow-sm rounded my-4">
+                <i class="bi bi-quote fs-3 text-success d-block"></i>
+                <p class="fst-italic mb-0 fw-medium text-dark">{{ info.motto }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Administrative Pillars Section -->
+    <div class="row mt-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="fw-bold text-dark">Core Administrative Pillars</h2>
+            <p class="text-muted">Targeted commitments driving sustainable development across Agatu LGA</p>
+        </div>
+
+        {% for pillar in info.pillars %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm p-3 rounded-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-patch-check-fill text-success fs-3 me-3"></i>
+                        <div>
+                            <h5 class="card-title fw-bold text-dark mb-0">{{ pillar }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

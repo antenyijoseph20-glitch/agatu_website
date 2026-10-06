@@ -1,0 +1,41 @@
+/* Custom Global Styles for Agatu LGA Portal */
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #212529;
+}
+
+/* Card Hover Animations */
+.hover-top {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-top:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Hero Section Enhancements */
+.hero-banner {
+    background-size: cover;
+    background-position: center;
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Font Adjustments */
+.fw-extrabold {
+    font-weight: 800;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+/* Custom Image Frame Utilities */
+.transform-rotate-3 {
+    transform: rotate(3deg);
+}
