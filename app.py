@@ -31,7 +31,12 @@ PROJECTS = [
         "status": "Under Construction",
         "stage": "Stage 2: Superstructure & Roof Level",
         "description": "A modern Computer-Based Test facility providing UTME/JAMB exam registration and digital skills training locally for Agatu youth.",
-        "image": "jamb_cbt_centre.jpg"
+        "cover_image": "jamb_cbt_centre.jpg",
+        "gallery": [
+            {"file": "jamb_cbt_centre.jpg", "caption": "Current Site Status — Superstructure Progress"},
+            {"file": "jamb_stage1.jpg", "caption": "Stage 1: Foundation & Ground Trenching"},
+            {"file": "jamb_stage2.jpg", "caption": "Stage 2: Blockwork & Wall Elevation"}
+        ]
     },
     {
         "id": 2,
@@ -41,7 +46,12 @@ PROJECTS = [
         "status": "Under Construction",
         "stage": "Stage 2: Structural Frame & Masonry",
         "description": "Integrated transit terminal featuring ticketing offices, passenger lounges, mechanic bays, mini pharmacy, and commercial shop stalls.",
-        "image": "bus_terminal.jpg"
+        "cover_image": "bus_terminal.jpg",
+        "gallery": [
+            {"file": "bus_terminal.jpg", "caption": "Main Terminal Site Overview"},
+            {"file": "bus_stage1.jpg", "caption": "Stage 1: Site Clearing & Excavation"},
+            {"file": "bus_stage2.jpg", "caption": "Stage 2: Framing & Column Casting"}
+        ]
     },
     {
         "id": 3,
@@ -51,7 +61,12 @@ PROJECTS = [
         "status": "Under Construction",
         "stage": "Stage 2: Blockwork & Facility Layout",
         "description": "Secure residential compound for National Youth Service Corps members posted to Agatu LGA, equipped with integrated retail shops.",
-        "image": "nysc_corpers_lodge.jpg"
+        "cover_image": "nysc_corpers_lodge.jpg",
+        "gallery": [
+            {"file": "nysc_corpers_lodge.jpg", "caption": "Residential Compound Front Layout"},
+            {"file": "nysc_stage1.jpg", "caption": "Stage 1: Foundation Pouring"},
+            {"file": "nysc_stage2.jpg", "caption": "Stage 2: Perimeter & Block Laying"}
+        ]
     },
     {
         "id": 4,
@@ -61,7 +76,12 @@ PROJECTS = [
         "status": "Ongoing Project",
         "stage": "Stage 1: Renovation & Structure Rehabilitation",
         "description": "Upgraded educational facility aimed at improving foundational learning, pupil safety, and educational standards across local wards.",
-        "image": "primary_school.jpg"
+        "image": "primary_school.jpg",
+        "cover_image": "primary_school.jpg",
+        "gallery": [
+            {"file": "primary_school.jpg", "caption": "Classroom Block Exterior"},
+            {"file": "school_stage1.jpg", "caption": "Roof Rehabilitation & Wall Repairs"}
+        ]
     },
     {
         "id": 5,
@@ -71,7 +91,11 @@ PROJECTS = [
         "status": "Active Site Works",
         "stage": "Stage 1: Excavation & Foundation Trenching",
         "description": "Ongoing excavation, trenching, and foundation laying for essential council offices and civic facilities.",
-        "image": "site_foundation.jpg"
+        "cover_image": "site_foundation.jpg",
+        "gallery": [
+            {"file": "site_foundation.jpg", "caption": "Excavation Works at Secretariat Grounds"},
+            {"file": "foundation_stage1.jpg", "caption": "Trenching & Concrete Reinforcement"}
+        ]
     }
 ]
 
