@@ -1,30 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Header Section -->
-<section class="bg-success text-white py-5 shadow-sm">
+<!-- Page Header -->
+<section class="bg-success text-white py-5 shadow-sm mb-4">
     <div class="container text-center">
-        <span class="badge bg-warning text-dark fw-bold px-3 py-2 mb-2">Executive Interventions</span>
-        <h1 class="display-5 fw-bold">Projects & Strategic Achievements</h1>
-        <p class="lead text-white-50">Tracking construction stages, infrastructure drives, and public facilities across Agatu LGA.</p>
+        <span class="badge bg-warning text-dark fw-bold px-3 py-2 mb-2">Project Portfolio</span>
+        <h1 class="display-5 fw-bold mb-2">Agatu LGA Development Track</h1>
+        <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
+            Explore executive interventions, infrastructure drives, and public facilities execution across all wards.
+        </p>
     </div>
 </section>
 
-<!-- Projects Gallery & Stages -->
-<section class="py-5 bg-light">
+<!-- Main Gallery Section -->
+<section class="pb-5">
     <div class="container">
-        <div class="row g-4">
+        
+        <!-- Dynamic Category Filter Buttons -->
+        {% set categories = projects | map(attribute='category') | unique | list %}
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-5 filter-container">
+            <button class="btn btn-success fw-bold px-4 py-2 rounded-pill filter-btn active shadow-sm" data-filter="all">
+                <i class="bi bi-grid-fill me-1"></i> All Projects
+            </button>
+            {% for cat in categories %}
+            <button class="btn btn-outline-success fw-semibold px-4 py-2 rounded-pill filter-btn shadow-sm" data-filter="{{ cat }}">
+                {{ cat }}
+            </button>
+            {% endfor %}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="row g-4" id="projectGrid">
             {% for project in projects %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 project-item" data-category="{{ project.category }}">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    
+                    <!-- Image Wrapper -->
                     <div class="position-relative">
-                        <img src="{{ url_for('static', filename='images/' + project.image) }}" 
+                        {% set cover_img = project.images[0] if project.images is sequence and project.images is not string else project.images %}
+                        <img src="{{ url_for('static', filename='images/' + cover_img) }}" 
                              class="card-img-top" 
                              alt="{{ project.title }}" 
-                             style="height: 240px; object-fit: cover;">
+                             style="height: 220px; object-fit: cover;">
+                             
                         <span class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-warning fw-bold px-3 py-1 m-3 rounded-pill fs-7 border border-warning">
                             {{ project.status }}
                         </span>
+                        
+                        {% if project.images is sequence and project.images is not string and project.images|length > 1 %}
+                        <span class="position-absolute bottom-0 start-0 bg-success text-white fw-bold px-2 py-1 m-2 rounded fs-7 shadow-sm">
+                            <i class="bi bi-images me-1"></i> {{ project.images|length }} Photos
+                        </span>
+                        {% endif %}
                     </div>
 
                     <div class="card-body d-flex flex-column p-4">
@@ -40,7 +67,7 @@
                             <i class="bi bi-geo-alt-fill me-1"></i> {{ project.location }}
                         </p>
                         
-                        <!-- Construction Stage Badge -->
+                        <!-- Construction Stage -->
                         <div class="p-2 bg-light border-start border-3 border-warning rounded mb-3">
                             <small class="text-dark fw-bold d-block"><i class="bi bi-gear-wide-connected text-warning me-1"></i> Construction Stage:</small>
                             <span class="small text-muted fw-semibold">{{ project.stage }}</span>
@@ -51,13 +78,13 @@
                         <button class="btn btn-outline-success fw-bold w-100 rounded-3 mt-auto" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#projectModal{{ project.id }}">
-                            <i class="bi bi-arrows-angle-expand me-1"></i> View Stage Details & Photo
+                            <i class="bi bi-arrows-angle-expand me-1"></i> View Stage Details & Photos
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal for Each Project -->
+            <!-- Modal with Gallery Reel Carousel -->
             <div class="modal fade" id="projectModal{{ project.id }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content rounded-4 border-0">
@@ -66,9 +93,45 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body p-4">
-                            <img src="{{ url_for('static', filename='images/' + project.image) }}" 
-                                 class="img-fluid rounded-3 mb-3 w-100 shadow-sm" 
-                                 alt="{{ project.title }}" style="max-height: 420px; object-fit: cover;">
+                            
+                            <!-- Carousel Reel inside Modal -->
+                            <div class="mb-4">
+                                {% if project.images is sequence and project.images is not string %}
+                                    <div id="projectCarousel{{ project.id }}" class="carousel slide shadow-sm rounded-3 overflow-hidden bg-dark" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for img in project.images %}
+                                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                                <img src="{{ url_for('static', filename='images/' + img) }}" 
+                                                     class="d-block w-100" 
+                                                     alt="{{ project.title }}" 
+                                                     style="height: 380px; object-fit: cover;">
+                                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-pill py-1 px-3 mb-2 w-auto mx-auto" style="width: fit-content !important;">
+                                                    <small class="text-white">Photo {{ loop.index }} of {{ project.images|length }}</small>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        
+                                        {% if project.images|length > 1 %}
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel{{ project.id }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3 shadow" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel{{ project.id }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon bg-dark rounded-circle p-3 shadow" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    <div class="rounded-3 overflow-hidden shadow-sm">
+                                        <img src="{{ url_for('static', filename='images/' + project.images) }}" 
+                                             class="img-fluid w-100" 
+                                             alt="{{ project.title }}" 
+                                             style="height: 380px; object-fit: cover;">
+                                    </div>
+                                {% endif %}
+                            </div>
                             
                             <div class="d-flex flex-wrap gap-2 mb-3">
                                 <span class="badge bg-success">{{ project.category }}</span>
@@ -90,4 +153,34 @@
         </div>
     </div>
 </section>
+
+<!-- Client-side Filtering Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const projectItems = document.querySelectorAll(".project-item");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove("btn-success", "active");
+                    btn.classList.add("btn-outline-success");
+                });
+
+                this.classList.remove("btn-outline-success");
+                this.classList.add("btn-success", "active");
+
+                const filterValue = this.getAttribute("data-filter");
+
+                projectItems.forEach(item => {
+                    if (filterValue === "all" || item.getAttribute("data-category") === filterValue) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+        });
+    });
+</script>
 {% endblock %}
