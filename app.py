@@ -1,8 +1,17 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_wtf.csrf import CSRFProtect
+import os
 from data.wards import WARDS
 
 app = Flask(__name__)
-app.secret_key = "agatu_lg_secret_key_2026"
+app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
+
+if not app.config["SECRET_KEY"]:
+    raise RuntimeError(
+        "FLASK_SECRET_KEY is required. Set it in your environment before starting the app."
+    )
+
+csrf = CSRFProtect(app)
 
 # 1. Profile details for Hon. (Amb.) Melvin James Ejeh
 # 1. Profile details for Hon. (Amb.) Melvin James Ejeh
@@ -194,9 +203,13 @@ def project_detail(project_id):
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        flash("Thank you! Your message has been sent to the Agatu Local Government Secretariat.", "success")
-        return redirect(url_for("contact"))
+        flash(
+            "This contact form is not connected to a message delivery system yet. "
+            "Your message was not sent.",
+            "warning",
+        )
+        return render_template("contact.html", info=CHAIRMAN_INFO), 503
     return render_template("contact.html", info=CHAIRMAN_INFO)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
