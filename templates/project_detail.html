@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="bg-success text-white py-5">
+    <div class="container">
+        <a href="{{ url_for('projects') }}" class="text-white">
+            <i class="bi bi-arrow-left me-1"></i> Back to Projects
+        </a>
+
+        <h1 class="display-5 fw-bold mt-3">{{ project.title }}</h1>
+        <p class="lead mb-0">{{ project.category }}</p>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        {% set images = project.images %}
+        {% if images is string %}
+            {% set images = [images] %}
+        {% endif %}
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="row g-3">
+                    {% for image in images %}
+                    <div class="{% if images|length == 1 %}col-12{% else %}col-md-6{% endif %}">
+                        <img
+                            src="{{ url_for('static', filename='images/' + image) }}"
+                            alt="{{ project.title }} photo {{ loop.index }}"
+                            class="img-fluid w-100 rounded-4 shadow-sm"
+                            style="height: 280px; object-fit: cover;"
+                            loading="lazy"
+                        >
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <article class="card border-0 shadow-sm rounded-4 mt-4">
+                    <div class="card-body p-4">
+                        <h2 class="h4 fw-bold">About This Project</h2>
+                        <p class="text-secondary mb-0">{{ project.description }}</p>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <h2 class="h5 fw-bold mb-3">Project Information</h2>
+
+                        <p><strong>Location</strong><br>{{ project.location }}</p>
+                        <p><strong>Category</strong><br>{{ project.category }}</p>
+                        <p><strong>Status</strong><br>{{ project.status }}</p>
+                        <p class="mb-0">
+                            <strong>Construction stage</strong><br>
+                            {{ project.stage }}
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -14,6 +14,12 @@ CHAIRMAN_INFO = {
         "A grassroots leader, security strategist, and administrator dedicated to digital transformation, "
         "peace building, youth empowerment, and rural development in Agatu LGA."
     ),
+
+    "image": "chairman.jpg",
+    "bio": (
+        "A grassroots leader and administrator focused on peace building, "
+        "youth empowerment, digital education, and rural development in Agatu LGA."
+    ),
     # Professional Contact & Social Media Information
     "contact": {
         "email": "info@agatulg.gov.ng",
