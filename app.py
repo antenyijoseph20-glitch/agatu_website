@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
+from data.wards import WARDS
 
 app = Flask(__name__)
 app.secret_key = "agatu_lg_secret_key_2026"
@@ -162,6 +163,14 @@ PROJECTS = [
 ]
 
 # 3. Web Routes
+@app.route("/wards")
+def wards():
+    return render_template(
+        "wards.html",
+        info=CHAIRMAN_INFO,
+        wards=WARDS,
+    )
+
 @app.route("/")
 def home():
     return render_template("index.html", info=CHAIRMAN_INFO, projects=PROJECTS[:3])

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="bg-success text-white py-5">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('home') }}" class="text-white">Home</a>
+                </li>
+                <li class="breadcrumb-item active text-white" aria-current="page">
+                    Wards and Communities
+                </li>
+            </ol>
+        </nav>
+
+        <h1 class="display-5 fw-bold">Wards and Communities</h1>
+        <p class="lead mb-0">
+            Explore the ten electoral wards of Agatu Local Government Area.
+        </p>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-7">
+                <h2 class="h3 fw-bold">Electoral Wards</h2>
+                <p class="text-secondary mb-0">
+                    Select a ward to view its electoral-area information.                </p>
+            </div>
+
+            <div class="col-md-5 mt-3 mt-md-0">
+                <label for="wardSearch" class="form-label">
+                    Search wards
+                </label>
+                <input
+                    type="search"
+                    id="wardSearch"
+                    class="form-control"
+                    placeholder="Enter a ward name..."
+                    aria-describedby="searchHelp"
+                >
+                <small id="searchHelp" class="text-secondary">
+                    Search by ward name or code.
+                </small>
+            </div>
+        </div>
+
+        <div class="row g-4" id="wardList">
+            {% for ward in wards %}
+            <div
+                class="col-md-6 col-lg-4 ward-card"
+                data-name="{{ ward.name|lower }}"
+                data-code="{{ ward.code }}"
+            >
+                <article class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <span class="badge bg-success mb-3">
+                            Ward {{ ward.code }}
+                        </span>
+
+                        <h3 class="h5 fw-bold">{{ ward.name }}</h3>
+
+                        <p class="text-secondary">
+                            {% if ward.villages %}
+                                {{ ward.villages|length }} listed communities
+                            {% else %}
+                                Community information is being verified.
+                            {% endif %}
+                        </p>
+
+                        {% if ward.villages %}
+                        <h4 class="h6 fw-semibold">Communities</h4>
+                        <ul>
+                            {% for village in ward.villages %}
+                            <li>{{ village }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+
+        <p id="noWardResults" class="alert alert-info mt-4" hidden>
+            No wards match your search.
+        </p>
+
+        <p class="small text-secondary mt-4">
+            Ward names are based on historical electoral records. Polling-unit
+            and community information should be confirmed against current official
+            records before being treated as authoritative.
+        </p>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("wardSearch");
+        const cards = document.querySelectorAll(".ward-card");
+        const noResults = document.getElementById("noWardResults");
+
+        searchInput.addEventListener("input", function () {
+            const query = searchInput.value.trim().toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach(function (card) {
+                const name = card.dataset.name;
+                const code = card.dataset.code;
+
+                const matches =
+                    name.includes(query) || code.includes(query);
+
+                card.hidden = !matches;
+
+                if (matches) {
+                    visibleCount += 1;
+                }
+            });
+
+            noResults.hidden = visibleCount !== 0;
+        });
+    });
+</script>
+{% endblock %}
