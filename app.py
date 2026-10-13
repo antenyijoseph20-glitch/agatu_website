@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_wtf.csrf import CSRFProtect
 
+from data.departments import DEPARTMENTS, LGEA_BOARD, HEALTH_BOARD
 from data.administrations import ADMINISTRATIONS
 from data.profile import CHAIRMAN_INFO
 from data.projects import PROJECTS
@@ -27,6 +28,9 @@ def home():
 def about():
     return render_template("about.html", info=CHAIRMAN_INFO)
 
+@app.route('/departments')
+def departments():
+    return render_template('departments.html', departments=DEPARTMENTS, lgea=LGEA_BOARD, health_board=HEALTH_BOARD)
 
 @app.route("/projects")
 def projects():

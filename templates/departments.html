@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Departments & Local Boards - Agatu LGA Portal{% endblock %}
+
+{% block content %}
+<section class="bg-success text-white py-5">
+    <div class="container">
+        <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}" class="text-white">Home</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Departments & Autonomous Boards</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 fw-bold">Council Departments & Autonomous Local Boards</h1>
+        <p class="lead mb-0">
+            Administrative structure, municipal departments, LGEA Teachers Board, and Local Primary Health Care Authority serving Agatu Local Government Area.
+        </p>
+    </div>
+</section>
+
+<div class="container py-5">
+
+    <!-- Autonomous Boards Section -->
+    <h3 class="fw-bold text-dark mb-4"><i class="bi bi-shield-check text-success me-2"></i>Autonomous Local Government Boards</h3>
+
+    <div class="row g-4 mb-5">
+        <!-- LGEA Teachers Board -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 bg-light border-start border-4 border-success">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-success p-2 me-3"><i class="bi bi-mortarboard-fill fs-4"></i></span>
+                        <div>
+                            <h4 class="h5 fw-bold text-dark mb-0">{{ lgea.title }}</h4>
+                            <small class="text-muted fw-semibold">Head: {{ lgea.leadership }}</small>
+                        </div>
+                    </div>
+                    <p class="text-secondary small mb-3">{{ lgea.board_overview }}</p>
+                    <small class="fw-bold text-dark d-block mb-2">Key Operational Units:</small>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for unit in lgea.units %}
+                        <span class="badge bg-success-subtle text-success border border-success px-2 py-1 small">
+                            {{ unit }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Primary Health Care Board -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100 bg-light border-start border-4 border-primary">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-primary p-2 me-3"><i class="bi bi-heart-pulse-fill fs-4"></i></span>
+                        <div>
+                            <h4 class="h5 fw-bold text-dark mb-0">{{ health_board.title }}</h4>
+                            <small class="text-muted fw-semibold">Head: {{ health_board.leadership }}</small>
+                        </div>
+                    </div>
+                    <p class="text-secondary small mb-3">{{ health_board.board_overview }}</p>
+                    <small class="fw-bold text-dark d-block mb-2">Key Operational Units:</small>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for unit in health_board.units %}
+                        <span class="badge bg-primary-subtle text-primary border border-primary px-2 py-1 small">
+                            {{ unit }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secretariat Council Departments Grid -->
+    <h3 class="fw-bold text-dark mb-4"><i class="bi bi-buildings-fill text-success me-2"></i>Secretariat Administrative Departments</h3>
+    
+    <div class="row g-4">
+        {% for dept in departments %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-4">
+                <div class="card-body p-4 d-flex flex-column">
+                    <span class="badge bg-secondary align-self-start mb-2">Department #0{{ dept.id }}</span>
+                    <h4 class="h5 fw-bold text-success mb-2">{{ dept.name }}</h4>
+                    <small class="text-muted fw-semibold mb-3 d-block"><i class="bi bi-person-badge me-1"></i>{{ dept.head }}</small>
+                    <p class="text-secondary small mb-3 flex-grow-1">{{ dept.description }}</p>
+                    
+                    <div class="pt-3 border-top">
+                        <small class="fw-bold text-dark d-block mb-2">Key Operational Units:</small>
+                        <div class="d-flex flex-wrap gap-1">
+                            {% for unit in dept.units %}
+                            <span class="badge bg-light text-dark border font-monospace small">{{ unit }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
