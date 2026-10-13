@@ -30,8 +30,12 @@ def about():
 
 @app.route('/departments')
 def departments():
-    return render_template('departments.html', departments=DEPARTMENTS, lgea=LGEA_BOARD, health_board=HEALTH_BOARD)
-
+    return render_template(
+        'departments.html', 
+        departments=DEPARTMENTS, 
+        lgea=LGEA_BOARD, 
+        health_board=HEALTH_BOARD
+    )
 @app.route("/projects")
 def projects():
     return render_template("projects.html", info=CHAIRMAN_INFO, projects=PROJECTS)
