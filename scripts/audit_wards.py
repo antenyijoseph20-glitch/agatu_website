@@ -66,9 +66,19 @@ def audit_wards():
         total_polling_units += len(units)
 
         for unit in units:
-            if not isinstance(unit, str) or not unit.strip():
+            # Validate dict structure for upgraded schema
+            if not isinstance(unit, dict):
                 errors.append(
-                    f"Ward {code} ({name}) contains an empty or invalid unit."
+                    f"Ward {code} ({name}) contains invalid unit structure (expected dict, got {type(unit).__name__})."
+                )
+                continue
+
+            unit_name = str(unit.get("name", "")).strip()
+            unit_code = str(unit.get("code", "")).strip()
+
+            if not unit_name or not unit_code:
+                errors.append(
+                    f"Ward {code} ({name}) contains unit with missing name or code: {unit!r}"
                 )
                 continue
 
@@ -76,8 +86,9 @@ def audit_wards():
                 {
                     "ward_code": code,
                     "ward_name": name,
-                    "original_name": unit.strip(),
-                    "normalized_name": normalize(unit),
+                    "unit_code": unit_code,
+                    "original_name": unit_name,
+                    "normalized_name": normalize(unit_name),
                 }
             )
 
@@ -116,7 +127,7 @@ def audit_wards():
             for unit in matching_units:
                 print(
                     f"    Ward {unit['ward_code']} "
-                    f"({unit['ward_name']}): {unit['original_name']}"
+                    f"({unit['ward_name']}) [{unit['unit_code']}]: {unit['original_name']}"
                 )
 
         warnings.append(
@@ -128,12 +139,8 @@ def audit_wards():
 
     # Report source and verification information.
     print("\nSource and verification:")
-    print(f"  Ward names: {SOURCE.get('ward_names', 'Not specified')}")
-    print(f"  Polling units: {SOURCE.get('polling_units', 'Not specified')}")
-    print(
-        "  Verification status: "
-        f"{SOURCE.get('verification_status', 'Not specified')}"
-    )
+    print(f"  Data source: {SOURCE.get('data_source', 'Not specified')}")
+    print(f"  Verification status: {SOURCE.get('verification_status', 'Not specified')}")
 
     print("\nAUDIT ERRORS:")
     if errors:
