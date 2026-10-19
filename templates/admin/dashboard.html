@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Agatu LGA Portal{% endblock %}
+
+{% block content %}
+<section class="bg-dark text-white py-4 mb-4">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="h4 mb-0 fw-bold">Executive Admin Dashboard</h2>
+            <small class="text-muted">Welcome, {{ current_user.full_name }} ({{ current_user.role | capitalize }})</small>
+        </div>
+        <div>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </div>
+</section>
+
+<div class="container mb-5">
+    <!-- Stat Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-success text-white">
+                <div class="card-body text-center p-3">
+                    <h3 class="display-6 fw-bold mb-0">{{ stats.total_news }}</h3>
+                    <small class="text-uppercase font-monospace">News Articles</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-primary text-white">
+                <div class="card-body text-center p-3">
+                    <h3 class="display-6 fw-bold mb-0">{{ stats.total_projects }}</h3>
+                    <small class="text-uppercase font-monospace">Monitored Projects</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-warning text-dark">
+                <div class="card-body text-center p-3">
+                    <h3 class="display-6 fw-bold mb-0">{{ stats.unread_messages }}</h3>
+                    <small class="text-uppercase font-monospace">Unread Messages</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-info text-white">
+                <div class="card-body text-center p-3">
+                    <h3 class="display-6 fw-bold mb-0">{{ stats.total_wards }}</h3>
+                    <small class="text-uppercase font-monospace">Council Wards</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Management Table -->
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white font-monospace fw-bold py-3">
+                    Published News Articles
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead class="table-light small">
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in news %}
+                            <tr>
+                                <td class="fw-bold text-dark small">{{ item.title[:45] }}...</td>
+                                <td><span class="badge bg-secondary small">{{ item.category }}</span></td>
+                                <td class="text-muted small">{{ item.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white font-monospace fw-bold py-3 d-flex justify-content-between align-items-center">
+                    <span>Recent Contact Submissions</span>
+                    <a href="{{ url_for('admin_messages') }}" class="btn btn-sm btn-outline-success">View All</a>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for msg in recent_messages %}
+                    <li class="list-group-item p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <strong class="small">{{ msg.name }}</strong>
+                            <small class="text-muted">{{ msg.submitted_at[:10] }}</small>
+                        </div>
+                        <p class="mb-1 text-muted small fw-semibold">{{ msg.subject }}</p>
+                        <small class="text-secondary d-block text-truncate">{{ msg.message }}</small>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-center text-muted py-4 small">No messages received yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

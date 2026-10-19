@@ -1,0 +1,10 @@
+[
+    {
+        "id": "1",
+        "username": "admin",
+        "email": "admin@agatugov.ng",
+        "password_hash": "scrypt:32768:8:1$4gpval9jDQ25vzKB$c27b3110b73f4324bf6ea760baf356cc9c014399b2a1cfe3e71ba6776fd0109292243471e37499c79368fde9dcfd53619d46137b662dcc5724eb9908922cde9a",
+        "role": "admin",
+        "full_name": "Agatu LGA Administrator"
+    }
+]

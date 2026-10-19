@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-success">Admin Portal</h3>
+                        <p class="text-muted small">Agatu Local Government Area Staff Login</p>
+                    </div>
+
+                    <!-- Flash Messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, msg in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show small" role="alert">
+                                    {{ msg }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label small fw-bold">Username or Email</label>
+                            <input type="text" class="form-control" id="username" name="username" required autofocus placeholder="Enter username">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label small fw-bold">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success py-2 fw-bold">Sign In to Dashboard</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
