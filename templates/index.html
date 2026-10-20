@@ -7,10 +7,11 @@
         <div class="row align-items-center g-4">
             <div class="col-lg-4 text-center">
                 {% if info and info.image %}
-                <img src="{{ url_for('static', filename='images/' + info.image) }}" 
-                     class="img-fluid rounded-circle shadow-lg border border-3 border-warning" 
-                     alt="{{ info.name }}" 
-                     style="width: 220px; height: 220px; object-fit: cover;">
+                <img src="{{ url_for('static', filename='images/' + info.image) }}"
+                     class="img-fluid rounded-circle shadow-lg border border-3 border-warning"
+                     alt="{{ info.name }}"
+                     style="width: 220px; height: 220px; object-fit: cover;"
+                     onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                 {% endif %}
             </div>
             <div class="col-lg-8">
@@ -18,10 +19,68 @@
                 <h1 class="display-5 fw-bold mb-2">{{ info.name if info else 'Agatu LGA' }}</h1>
                 <p class="lead text-warning fw-semibold mb-3">{{ info.title if info else 'Chairman' }}</p>
                 <p class="text-white-50 fs-6 mb-4">{{ info.bio if info else 'Welcome to the official portal for executive interventions, infrastructure drives, and public facilities tracking across Agatu LGA.' }}</p>
-                <a href="{{ url_for('projects') }}" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm">
+                <a href="{{ url_for('projects') }}" class="btn btn-warning text-dark fw-bold px-4 py-2 rounded-pill shadow-sm me-2 mb-2">
                     <i class="bi bi-arrow-right-circle me-1"></i> View All Projects
                 </a>
+                <a href="{{ url_for('news_list') }}" class="btn btn-outline-light fw-bold px-4 py-2 rounded-pill shadow-sm mb-2">
+                    <i class="bi bi-newspaper me-1"></i> Read News Flash
+                </a>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest News & Press Releases Section -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <span class="badge bg-primary bg-opacity-10 text-primary fw-bold px-3 py-1 mb-1">Official Media</span>
+                <h2 class="fw-bold text-dark mb-0">Latest News &amp; Press Releases</h2>
+            </div>
+            <a href="{{ url_for('news_list') }}" class="btn btn-outline-primary fw-semibold rounded-pill">
+                See All News <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+
+        <div class="row g-4">
+            {% for item in news %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                    <div class="position-relative">
+                        {% set news_img = item.image_file if item.image_file else 'default_news.jpg' %}
+                        <img src="{{ url_for('static', filename='images/' + news_img) }}"
+                             class="card-img-top"
+                             alt="{{ item.title }}"
+                             style="height: 200px; object-fit: cover;"
+                             onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
+                        <span class="position-absolute top-0 end-0 bg-success text-white fw-bold px-3 py-1 m-3 rounded-pill fs-7">
+                            {{ item.category }}
+                        </span>
+                    </div>
+
+                    <div class="card-body p-4 d-flex flex-column">
+                        <small class="text-muted fw-semibold mb-2 d-block">
+                            <i class="bi bi-calendar3 me-1"></i> {{ item.created_at }}
+                        </small>
+
+                        <h5 class="fw-bold text-dark mb-2 h6">{{ item.title }}</h5>
+                        <p class="text-secondary small flex-grow-1">{{ item.summary }}</p>
+
+                        <div class="pt-3 border-top mt-auto d-flex justify-content-between align-items-center">
+                            <small class="text-muted"><i class="bi bi-person me-1"></i> {{ item.author }}</small>
+                            <a href="{{ url_for('news_detail', slug=item.slug) }}" class="btn btn-sm btn-outline-success fw-bold rounded-pill">
+                                Read Article <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12 text-center py-4">
+                <p class="text-muted">No news articles published yet.</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -43,14 +102,14 @@
             {% for project in projects %}
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <!-- Safe Image Renderer -->
                     <div class="position-relative">
                         {% set cover_img = project.images[0] if project.images is sequence and project.images is not string else project.images %}
-                        <img src="{{ url_for('static', filename='images/' + cover_img) }}" 
-                             class="card-img-top" 
-                             alt="{{ project.title }}" 
-                             style="height: 220px; object-fit: cover;">
-                             
+                        <img src="{{ url_for('static', filename='images/' + cover_img) }}"
+                             class="card-img-top"
+                             alt="{{ project.title }}"
+                             style="height: 220px; object-fit: cover;"
+                             onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
+
                         <span class="position-absolute top-0 end-0 bg-dark bg-opacity-75 text-warning fw-bold px-3 py-1 m-3 rounded-pill fs-7 border border-warning">
                             {{ project.status }}
                         </span>
@@ -67,14 +126,13 @@
                                 {{ project.category }}
                             </span>
                         </div>
-                        
+
                         <h5 class="card-title fw-bold text-dark mb-1">{{ project.title }}</h5>
-                        
+
                         <p class="small text-danger fw-semibold mb-2">
                             <i class="bi bi-geo-alt-fill me-1"></i> {{ project.location }}
                         </p>
-                        
-                        <!-- Construction Stage Badge -->
+
                         <div class="p-2 bg-light border-start border-3 border-warning rounded mb-3">
                             <small class="text-dark fw-bold d-block"><i class="bi bi-gear-wide-connected text-warning me-1"></i> Construction Stage:</small>
                             <span class="small text-muted fw-semibold">{{ project.stage }}</span>
@@ -82,10 +140,10 @@
 
                         <p class="card-text text-secondary mb-4 flex-grow-1">{{ project.description }}</p>
 
-                        <button class="btn btn-outline-success fw-bold w-100 rounded-3 mt-auto" 
-                                data-bs-toggle="modal" 
+                        <button class="btn btn-outline-success fw-bold w-100 rounded-3 mt-auto"
+                                data-bs-toggle="modal"
                                 data-bs-target="#projectModal{{ project.id }}">
-                            <i class="bi bi-arrows-angle-expand me-1"></i> View Stage Details & Photos
+                            <i class="bi bi-arrows-angle-expand me-1"></i> View Stage Details &amp; Photos
                         </button>
                     </div>
                 </div>
@@ -100,28 +158,28 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body p-4">
-                            
-                            <!-- Gallery Grid inside Modal -->
                             <div class="row g-2 mb-3">
                                 {% if project.images is sequence and project.images is not string %}
                                     {% for img in project.images %}
                                     <div class="col-{% if project.images|length == 1 %}12{% else %}6{% endif %}">
-                                        <img src="{{ url_for('static', filename='images/' + img) }}" 
-                                             class="img-fluid rounded-3 w-100 shadow-sm" 
-                                             alt="{{ project.title }}" 
-                                             style="height: 250px; object-fit: cover;">
+                                        <img src="{{ url_for('static', filename='images/' + img) }}"
+                                             class="img-fluid rounded-3 w-100 shadow-sm"
+                                             alt="{{ project.title }}"
+                                             style="height: 250px; object-fit: cover;"
+                                             onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                                     </div>
                                     {% endfor %}
                                 {% else %}
                                     <div class="col-12">
-                                        <img src="{{ url_for('static', filename='images/' + project.images) }}" 
-                                             class="img-fluid rounded-3 w-100 shadow-sm" 
-                                             alt="{{ project.title }}" 
-                                             style="height: 250px; object-fit: cover;">
+                                        <img src="{{ url_for('static', filename='images/' + project.images) }}"
+                                             class="img-fluid rounded-3 w-100 shadow-sm"
+                                             alt="{{ project.title }}"
+                                             style="height: 250px; object-fit: cover;"
+                                             onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                                     </div>
                                 {% endif %}
                             </div>
-                            
+
                             <div class="d-flex flex-wrap gap-2 mb-3">
                                 <span class="badge bg-success">{{ project.category }}</span>
                                 <span class="badge bg-warning text-dark">{{ project.status }}</span>
@@ -129,7 +187,7 @@
 
                             <p class="fw-semibold text-danger mb-1"><i class="bi bi-geo-alt-fill me-1"></i> Location: {{ project.location }}</p>
                             <p class="fw-bold text-dark mb-3"><i class="bi bi-tools text-warning me-1"></i> Current Stage: {{ project.stage }}</p>
-                            
+
                             <p class="text-secondary fs-6">{{ project.description }}</p>
                         </div>
                         <div class="modal-footer bg-light">

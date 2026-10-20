@@ -1,7 +1,13 @@
+import tempfile
 import os
 import json
+import re
+import uuid
 from datetime import datetime
-from flask import Flask, render_template, request, flash, redirect, url_for
+
+import bleach
+from PIL import Image, UnidentifiedImageError
+from flask import Flask, render_template, request, flash, redirect, url_for, abort
 from flask_wtf.csrf import CSRFProtect
 from flask_login import (
     LoginManager,
@@ -12,24 +18,33 @@ from flask_login import (
     current_user,
 )
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 
 from data.departments import DEPARTMENTS, LGEA_BOARD, HEALTH_BOARD
 from data.administrations import ADMINISTRATIONS
 from data.profile import CHAIRMAN_INFO
 from data.projects import PROJECTS
 from data.wards import WARDS
-from data.news import NEWS
 from forms import ContactForm
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
-
 if not app.config["SECRET_KEY"]:
     raise RuntimeError(
         "FLASK_SECRET_KEY is required. Set it in your environment before starting the app."
     )
 
+# Limit each incoming request, including uploaded photos, to 5 MiB.
+app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
+
 csrf = CSRFProtect(app)
+@app.errorhandler(413)
+def handle_request_too_large(error):
+    return (
+        "Upload too large. Please return to the previous page "
+        "and choose a file smaller than 5 MiB.",
+        413,
+    )
 
 # --- Flask-Login Configuration ---
 login_manager = LoginManager()
@@ -62,7 +77,7 @@ def load_user(user_id):
     return None
 
 
-# --- Helper Function for Contact Messages ---
+# --- Helper Functions for Data Persistence ---
 def get_contact_messages():
     messages_file = os.path.join(app.root_path, "data", "messages.json")
     if os.path.exists(messages_file):
@@ -73,11 +88,65 @@ def get_contact_messages():
             return []
     return []
 
+def load_news():
+    news_file = os.path.join(app.root_path, "data", "news.json")
+    if os.path.exists(news_file):
+        try:
+            with open(news_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return []
+    return []
+
+def save_news(news_list):
+    news_file = os.path.join(app.root_path, "data", "news.json")
+    news_directory = os.path.dirname(news_file)
+    os.makedirs(news_directory, exist_ok=True)
+
+    temp_path = None
+
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=news_directory,
+            prefix=".news-",
+            suffix=".tmp",
+            delete=False,
+        ) as temp_file:
+            temp_path = temp_file.name
+            json.dump(news_list, temp_file, indent=4, ensure_ascii=False)
+            temp_file.flush()
+            os.fsync(temp_file.fileno())
+
+        # Replace the file only after the complete JSON has been written.
+        os.replace(temp_path, news_file)
+        temp_path = None
+
+    finally:
+        # Clean up any temporary file left by a failed write.
+        if temp_path and os.path.exists(temp_path):
+            os.remove(temp_path)
+
+def simple_slug(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9]+', '-', text)
+    return text.strip('-')
+
 
 # --- Core Public Routes ---
 @app.route("/")
 def home():
-    return render_template("index.html", info=CHAIRMAN_INFO, projects=PROJECTS[:3], news=NEWS[:3])
+    news_items = [
+        item for item in load_news()
+        if item.get("is_published", True)
+    ]
+    return render_template(
+        "index.html",
+        info=CHAIRMAN_INFO,
+        projects=PROJECTS[:3],
+        news=news_items[:3],
+    )
 
 
 @app.route("/about")
@@ -123,21 +192,27 @@ def administrations():
     )
 
 
-# --- Step 1: News & Blog Routes ---
+# --- Dynamic News & Blog Routes ---
+# --- Dynamic News & Blog Routes ---
 @app.route("/news")
 def news_list():
     category = request.args.get("category", "").strip()
     query = request.args.get("q", "").strip().lower()
 
-    filtered_news = [n for n in NEWS if n.get("is_published", True)]
+    all_news = load_news()
+    filtered_news = [n for n in all_news if n.get("is_published", True)]
 
     if category:
-        filtered_news = [n for n in filtered_news if n.get("category", "").lower() == category.lower()]
+        filtered_news = [
+            n for n in filtered_news
+            if n.get("category", "").lower() == category.lower()
+        ]
 
     if query:
         filtered_news = [
             n for n in filtered_news
-            if query in n.get("title", "").lower() or query in n.get("content", "").lower()
+            if query in n.get("title", "").lower()
+            or query in n.get("content", "").lower()
         ]
 
     return render_template(
@@ -148,19 +223,19 @@ def news_list():
         search_query=query,
     )
 
-
 @app.route("/news/<slug>")
 def news_detail(slug):
-    post = next((n for n in NEWS if n.get("slug") == slug and n.get("is_published", True)), None)
+    all_news = load_news()
+    post = next((n for n in all_news if n.get("slug") == slug and n.get("is_published", True)), None)
     if not post:
         flash("News article not found.", "warning")
         return redirect(url_for("news_list"))
 
-    recent_posts = [n for n in NEWS if n.get("slug") != slug and n.get("is_published", True)][:3]
+    recent_posts = [n for n in all_news if n.get("slug") != slug and n.get("is_published", True)][:3]
     return render_template("news_detail.html", info=CHAIRMAN_INFO, post=post, recent_posts=recent_posts)
 
 
-# --- Step 2: Interactive Contact Form ---
+# --- Interactive Contact Form ---
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     form = ContactForm()
@@ -192,7 +267,7 @@ def contact():
     return render_template("contact.html", info=CHAIRMAN_INFO, form=form)
 
 
-# --- Step 3: Authentication Routes ---
+# --- Authentication Routes ---
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
@@ -235,15 +310,16 @@ def logout():
     return redirect(url_for("home"))
 
 
-# --- Step 4: Admin Portal & Dashboard ---
+# --- Admin Portal & Dashboard ---
 @app.route("/admin")
 @login_required
 def admin_dashboard():
     messages = get_contact_messages()
+    all_news = load_news()
     unread_count = sum(1 for m in messages if not m.get("is_read", False))
 
     stats = {
-        "total_news": len(NEWS),
+        "total_news": len(all_news),
         "total_projects": len(PROJECTS),
         "total_wards": len(WARDS),
         "total_messages": len(messages),
@@ -255,8 +331,91 @@ def admin_dashboard():
         info=CHAIRMAN_INFO,
         stats=stats,
         recent_messages=messages[-5:],
-        news=NEWS,
+        news=all_news,
     )
+
+
+# --- Media Aide: News Creation Route ---
+@app.route("/admin/news/new", methods=["GET", "POST"])
+@login_required
+def admin_news_create():
+    if request.method == "POST":
+        title = request.form.get("title", "").strip()
+        category = request.form.get("category", "").strip()
+        summary = request.form.get("summary", "").strip()
+        content = request.form.get("content", "").strip()
+        author = request.form.get("author", "Agatu LGA Media Office").strip()
+
+        if not all([title, category, summary, content, author]):
+            flash("Please complete all required news fields.", "danger")
+            return redirect(url_for("admin_news_create"))
+
+        # Keep basic formatting but remove scripts and unsafe HTML attributes.
+        content = bleach.clean(
+            content,
+            tags=[
+                "p", "br", "strong", "b", "em", "i", "u",
+                "ul", "ol", "li", "h2", "h3", "blockquote", "a",
+            ],
+            attributes={"a": ["href", "title"]},
+            protocols=["http", "https", "mailto"],
+            strip=True,
+        )
+
+        # Verify uploaded image content; never trust the filename or browser MIME type.
+        file = request.files.get("image")
+        if not file or not file.filename:
+            flash("Please select a photo to upload.", "danger")
+            return redirect(url_for("admin_news_create"))
+
+        try:
+            with Image.open(file.stream) as uploaded_image:
+                image_format = uploaded_image.format
+                if image_format not in {"JPEG", "PNG", "WEBP"}:
+                    raise ValueError("Unsupported image format")
+                uploaded_image.verify()
+
+            file.stream.seek(0)
+            with Image.open(file.stream) as uploaded_image:
+                upload_folder = os.path.join(app.root_path, "static", "images")
+                os.makedirs(upload_folder, exist_ok=True)
+
+                extension_by_format = {
+                    "JPEG": ".jpg",
+                    "PNG": ".png",
+                    "WEBP": ".webp",
+                }
+                image_file = f"{uuid.uuid4().hex}{extension_by_format[image_format]}"
+                destination = os.path.join(upload_folder, image_file)
+                uploaded_image.save(destination, format=image_format)
+        except (UnidentifiedImageError, OSError, ValueError):
+            flash("Upload a valid JPEG, PNG, or WEBP image under 5 MiB.", "danger")
+            return redirect(url_for("admin_news_create"))
+
+        all_news = load_news()
+        new_id = max([item.get("id", 0) for item in all_news], default=0) + 1
+
+        new_post = {
+            "id": new_id,
+            "slug": simple_slug(title),
+            "title": title,
+            "category": category,
+            "summary": summary,
+            "content": content,
+            "image_file": image_file,
+            "additional_images": [image_file],
+            "author": author,
+            "created_at": datetime.now().strftime("%B %d, %Y"),
+            "is_published": True,
+        }
+
+        all_news.insert(0, new_post)
+        save_news(all_news)
+
+        flash("Chairman activity post published successfully!", "success")
+        return redirect(url_for("news_list"))
+
+    return render_template("admin/news_form.html", info=CHAIRMAN_INFO)
 
 
 @app.route("/admin/messages")
