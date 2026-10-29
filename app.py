@@ -134,6 +134,118 @@ def simple_slug(text):
     return text.strip('-')
 
 
+def load_directory_records(filename):
+    """Load a JSON directory without changing its source records."""
+    path = os.path.join(app.root_path, "data", filename)
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            records = json.load(file)
+    except (OSError, json.JSONDecodeError):
+        app.logger.exception("Could not load directory data: %s", filename)
+        return []
+
+    return records if isinstance(records, list) else []
+
+
+def filter_directory_records(records, query, ward_key, selected_ward, selected_status):
+    """Filter directory records while retaining their original field values."""
+    filtered = []
+
+    for record in records:
+        record_ward = str(record.get(ward_key) or "").strip()
+        record_status = str(record.get("verification_status") or "").strip()
+
+        if selected_ward and record_ward != selected_ward:
+            continue
+
+        if selected_status and record_status != selected_status:
+            continue
+
+        searchable_text = " ".join(
+            str(value)
+            for value in record.values()
+            if value is not None
+        ).casefold()
+
+        if query and query.casefold() not in searchable_text:
+            continue
+
+        filtered.append(record)
+
+    return filtered
+
+
+def directory_filter_options(records, ward_key):
+    """Build filter choices from values actually present in the data."""
+    wards = sorted(
+        {
+            str(record.get(ward_key)).strip()
+            for record in records
+            if record.get(ward_key)
+        },
+        key=str.casefold,
+    )
+    statuses = sorted(
+        {
+            str(record.get("verification_status")).strip()
+            for record in records
+            if record.get("verification_status")
+        },
+        key=str.casefold,
+    )
+    return wards, statuses
+
+
+@app.route("/schools")
+def schools_directory():
+    records = load_directory_records("schools.json")
+    query = request.args.get("q", "").strip()
+    selected_ward = request.args.get("ward", "").strip()
+    selected_status = request.args.get("status", "").strip()
+    wards, statuses = directory_filter_options(records, "ward")
+
+    filtered = filter_directory_records(
+        records, query, "ward", selected_ward, selected_status
+    )
+
+    return render_template(
+        "schools.html",
+        info=CHAIRMAN_INFO,
+        schools=filtered,
+        total_count=len(records),
+        query=query,
+        wards=wards,
+        statuses=statuses,
+        selected_ward=selected_ward,
+        selected_status=selected_status,
+    )
+
+
+@app.route("/health-facilities")
+def health_facilities_directory():
+    records = load_directory_records("health_facilities.json")
+    query = request.args.get("q", "").strip()
+    selected_ward = request.args.get("ward", "").strip()
+    selected_status = request.args.get("status", "").strip()
+    wards, statuses = directory_filter_options(records, "ward_source")
+
+    filtered = filter_directory_records(
+        records, query, "ward_source", selected_ward, selected_status
+    )
+
+    return render_template(
+        "health_facilities.html",
+        info=CHAIRMAN_INFO,
+        facilities=filtered,
+        total_count=len(records),
+        query=query,
+        wards=wards,
+        statuses=statuses,
+        selected_ward=selected_ward,
+        selected_status=selected_status,
+    )
+
+
 # --- Core Public Routes ---
 @app.route("/")
 def home():

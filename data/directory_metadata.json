@@ -1,0 +1,52 @@
+{
+  "title": "Agatu LGA School and Primary Healthcare Directory Starter Data",
+  "purpose": "Initial structured records for implementing searchable school and healthcare directories in the Agatu LGA website.",
+  "important_limitations": [
+    "This is a starter package based only on records visible in the reviewed conversation, not a complete export of SEMS or the health-facility database.",
+    "SEMS statistics previously reviewed reported 62 schools classified as Primary and 5 classified as Pre-primary & Primary for Agatu; the full individual school records have not yet been extracted here.",
+    "The school file contains four illustrative records found in the reviewed directory results, not the complete school register.",
+    "The healthcare file includes the 51 names summarized in the prior review; community names, facility codes, and operational status are not confirmed in this package.",
+    "All records remain needs_confirmation until reconciled with the responsible authority.",
+    "Do not describe mission-owned schools as government-supported without supporting evidence.",
+    "Do not infer community from a facility name where the official location is not established."
+  ],
+  "school_source": {
+    "name": "Benue State Smart Education Management System",
+    "url": "https://benuestate.sems.ng/state/schools?lga=Agatu",
+    "reported_agatu_counts_in_prior_review": {
+      "primary": 62,
+      "pre_primary_and_primary": 5,
+      "pre_primary_only": 3,
+      "secondary": 46,
+      "public": 104,
+      "community": 5,
+      "private": 4,
+      "mission_faith_based": 3,
+      "verified_schools": 0
+    }
+  },
+  "health_sources": [
+    {
+      "name": "Benue State Health Facility Listing",
+      "url": "https://library.procurementmonitor.org/backend/files/List%20of%20Coded%20Health%20Facilities%20in%20BENUE%20STATE.pdf",
+      "reported_agatu_count_in_prior_review": 51
+    },
+    {
+      "name": "Benue State Health Insurance Agency BHCPF facilities directory",
+      "url": "https://www.bnshia.be.gov.ng/bhcpf-facilities",
+      "reported_agatu_entries_in_prior_review": 10
+    }
+  ],
+  "wards": [
+    "Egba",
+    "Enungba",
+    "Obagaji",
+    "Odugbeho",
+    "Ogbaulu",
+    "Ogwule-Kaduna",
+    "Ogwule Ogbaulu",
+    "Okokolo",
+    "Oshigbudu",
+    "Usha"
+  ]
+}

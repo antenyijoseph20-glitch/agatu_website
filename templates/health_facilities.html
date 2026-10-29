@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Primary Healthcare Directory - Agatu LGA{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-4">
+        <div class="col-lg-8">
+            <h1 class="fw-bold text-success">Primary Healthcare Directory</h1>
+            <p class="lead text-muted">
+                A developing directory of reported health facilities across Agatu's council wards.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <span class="d-block fs-2 fw-bold text-success">{{ total_count }}</span>
+                    <span class="text-muted">Records currently in this dataset</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="get" action="{{ url_for('health_facilities_directory') }}" class="card card-body shadow-sm mb-4">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="facility-search" class="form-label">Search facilities</label>
+                <input id="facility-search" class="form-control" type="search" name="q"
+                       value="{{ query }}" placeholder="Facility, community, type, code...">
+            </div>
+            <div class="col-md-3">
+                <label for="facility-ward" class="form-label">Ward</label>
+                <select id="facility-ward" name="ward" class="form-select">
+                    <option value="">All wards</option>
+                    {% for ward in wards %}
+                    <option value="{{ ward }}" {% if selected_ward == ward %}selected{% endif %}>{{ ward }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="facility-status" class="form-label">Verification</label>
+                <select id="facility-status" name="status" class="form-select">
+                    <option value="">All statuses</option>
+                    {% for status in statuses %}
+                    <option value="{{ status }}" {% if selected_status == status %}selected{% endif %}>{{ status|replace('_', ' ')|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-grid gap-2">
+                <button class="btn btn-success" type="submit">Filter</button>
+                <a class="btn btn-outline-secondary" href="{{ url_for('health_facilities_directory') }}">Clear</a>
+            </div>
+        </div>
+    </form>
+
+    <p class="text-muted">Showing {{ facilities|length }} of {{ total_count }} records.</p>
+
+    {% if facilities %}
+    <div class="row g-3">
+        {% for facility in facilities %}
+        <div class="col-12">
+            <article class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                        <h2 class="h5 fw-bold mb-0">{{ facility.name_source }}</h2>
+                        <span class="badge bg-warning text-dark align-self-start">
+                            {{ facility.verification_status|default('needs_confirmation', true)|replace('_', ' ')|title }}
+                        </span>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Ward in source:</strong> {{ facility.ward_source or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Community:</strong> {{ facility.community or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Facility type in source:</strong> {{ facility.facility_type_source or 'Not recorded' }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Ownership in source:</strong> {{ facility.ownership_source or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Facility code:</strong> {{ facility.facility_code or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Operational status:</strong> {{ facility.operational_status|default('unknown', true)|replace('_', ' ')|title }}</p>
+                            <p class="mb-1"><strong>Record ID:</strong> <code>{{ facility.id }}</code></p>
+                        </div>
+                    </div>
+                    {% if facility.notes %}
+                    <p class="small text-muted mt-3 mb-2">{{ facility.notes }}</p>
+                    {% endif %}
+                    <div class="d-flex flex-wrap gap-3">
+                        {% if facility.source_url %}
+                        <a href="{{ facility.source_url }}" target="_blank" rel="noopener noreferrer">
+                            View source register
+                        </a>
+                        {% endif %}
+                        {% if facility.cross_check_url %}
+                        <a href="{{ facility.cross_check_url }}" target="_blank" rel="noopener noreferrer">
+                            Check additional health-facility source
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="status">
+        No facility records match these filters. Try another search or clear the filters.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

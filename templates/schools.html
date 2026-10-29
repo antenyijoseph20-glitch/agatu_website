@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Schools Directory - Agatu LGA{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-4">
+        <div class="col-lg-8">
+            <h1 class="fw-bold text-success">Schools Directory</h1>
+            <p class="lead text-muted">
+                A developing directory of schools recorded for Agatu Local Government Area, Benue State.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm text-center">
+                <div class="card-body">
+                    <span class="d-block fs-2 fw-bold text-success">{{ total_count }}</span>
+                    <span class="text-muted">Records currently in this dataset</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="get" action="{{ url_for('schools_directory') }}" class="card card-body shadow-sm mb-4">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="school-search" class="form-label">Search schools</label>
+                <input id="school-search" class="form-control" type="search" name="q"
+                       value="{{ query }}" placeholder="School, community, ownership...">
+            </div>
+            <div class="col-md-3">
+                <label for="school-ward" class="form-label">Ward</label>
+                <select id="school-ward" name="ward" class="form-select">
+                    <option value="">All wards</option>
+                    {% for ward in wards %}
+                    <option value="{{ ward }}" {% if selected_ward == ward %}selected{% endif %}>{{ ward }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="school-status" class="form-label">Verification</label>
+                <select id="school-status" name="status" class="form-select">
+                    <option value="">All statuses</option>
+                    {% for status in statuses %}
+                    <option value="{{ status }}" {% if selected_status == status %}selected{% endif %}>{{ status|replace('_', ' ')|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 d-grid gap-2">
+                <button class="btn btn-success" type="submit">Filter</button>
+                <a class="btn btn-outline-secondary" href="{{ url_for('schools_directory') }}">Clear</a>
+            </div>
+        </div>
+    </form>
+
+    <p class="text-muted">Showing {{ schools|length }} of {{ total_count }} records.</p>
+
+    {% if schools %}
+    <div class="row g-3">
+        {% for school in schools %}
+        <div class="col-12">
+            <article class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                        <h2 class="h5 fw-bold mb-0">{{ school.name }}</h2>
+                        <span class="badge bg-warning text-dark align-self-start">
+                            {{ school.verification_status|default('needs_confirmation', true)|replace('_', ' ')|title }}
+                        </span>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Ward:</strong> {{ school.ward or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Community:</strong> {{ school.community or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Level in source:</strong> {{ school.school_level_source or 'Not recorded' }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Ownership in source:</strong> {{ school.ownership_source or 'Not recorded' }}</p>
+                            <p class="mb-1"><strong>Government support:</strong> {{ school.government_support_status or 'Not assessed' }}</p>
+                            <p class="mb-1"><strong>Record ID:</strong> <code>{{ school.id }}</code></p>
+                        </div>
+                    </div>
+                    {% if school.notes %}
+                    <p class="small text-muted mt-3 mb-2">{{ school.notes }}</p>
+                    {% endif %}
+                    {% if school.source_url %}
+                    <a href="{{ school.source_url }}" target="_blank" rel="noopener noreferrer">
+                        View source: {{ school.source or 'Source record' }}
+                    </a>
+                    {% else %}
+                    <span class="small text-muted">Source link not available.</span>
+                    {% endif %}
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="status">
+        No school records match these filters. Try another search or clear the filters.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
