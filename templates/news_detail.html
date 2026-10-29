@@ -25,9 +25,8 @@
             <div class="mb-4">
                 {% set main_img = post.image_file if post.image_file else 'default_news.jpg' %}
                 <img src="{{ url_for('static', filename='images/' + main_img) }}"
-                     class="img-fluid rounded-4 w-100 shadow-sm mb-3"
+                     class="img-fluid rounded-4 w-100 shadow-sm mb-3 article-feature-image"
                      alt="{{ post.title }}"
-                     style="max-height: 450px; object-fit: cover;"
                      onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
             </div>
 
@@ -45,9 +44,8 @@
                     <div class="col-md-4">
                         <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
                             <img src="{{ url_for('static', filename='images/' + add_img) }}"
-                                 class="card-img-top"
+                                 class="card-img-top news-gallery-image"
                                  alt="Agatu Flood Assessment Field Photo"
-                                 style="height: 180px; object-fit: cover;"
                                  onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                         </div>
                     </div>
@@ -74,7 +72,7 @@
                     {% for recent in recent_posts %}
                     <div class="d-flex gap-3 align-items-center pb-3 border-bottom">
                         <img src="{{ url_for('static', filename='images/' + (recent.image_file or 'default_news.jpg')) }}"
-                             class="rounded-3" style="width: 70px; height: 70px; object-fit: cover;" alt="{{ recent.title }}">
+                             class="rounded-3 news-thumbnail" alt="{{ recent.title }}">
                         <div>
                             <span class="badge bg-light text-success fw-bold fs-7 mb-1">{{ recent.category }}</span>
                             <h6 class="fw-bold mb-1 fs-7">

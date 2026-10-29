@@ -36,9 +36,8 @@
                 <div class="position-relative">
                     {% set news_img = item.image_file if item.image_file else 'default_news.jpg' %}
                     <img src="{{ url_for('static', filename='images/' + news_img) }}"
-                         class="card-img-top"
+                         class="card-img-top news-card-image"
                          alt="{{ item.title }}"
-                         style="height: 220px; object-fit: cover;"
                          onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                     <span class="position-absolute top-0 end-0 bg-success text-white fw-bold px-3 py-1 m-3 rounded-pill fs-7">
                         {{ item.category }}

@@ -92,3 +92,39 @@ body {
 .badge {
     letter-spacing: 0.5px;
 }
+
+/* News image presentation: preserve people and full-scene photographs. */
+.news-card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #f8f9fa;
+}
+
+.article-feature-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 650px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #f8f9fa;
+}
+
+.news-gallery-image {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #f8f9fa;
+}
+
+.news-thumbnail {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    object-fit: contain;
+    object-position: center;
+    background-color: #f8f9fa;
+}

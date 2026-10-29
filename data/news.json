@@ -1,19 +1,71 @@
 [
-    {
-        "id": 1,
-        "slug": "agatu-chairman-leads-sema-iom-red-cross-flood-assessment",
-        "title": "Agatu Chairman Leads SEMA, IOM and Red Cross in Assessment of 32 Flood-Affected Communities",
-        "category": "Disaster Relief & Public Safety",
-        "summary": "Agatu LGA Chairman Hon. Amb. James Melvin Ejeh appeals for urgent humanitarian assistance following a joint assessment of 32 flood-affected communities, alongside the distribution of 150 life jackets supplied by HYPPADEC.",
-        "content": "<p>The Executive Chairman of Agatu Local Government Area,\n<strong>Hon. Amb. James Melvin Ejeh</strong>, has appealed for urgent\nhumanitarian assistance for 32 communities reportedly affected by flooding.\nThe appeal was made on Sunday, October 18, 2026, when the Chairman received\na joint rapid assessment team from the Benue State Emergency Management\nAgency (Benue-SEMA), the International Organization for Migration (IOM),\nand the Nigerian Red Cross.</p>\n\n<p>The team visited to assess the impact of the flooding, identify urgent\nneeds, and help guide possible humanitarian interventions. The Chairman\nreceived the delegation alongside the community leaders of Oweto and\nUtugolugu, Chief Ibrahim Kwelono and Chief Sule Ajaka.</p>\n\n<p>Reports indicated that houses, farmlands, food supplies, and household\nitems had been damaged. These losses have raised concerns about shelter,\nfood security, and the livelihoods of affected residents.</p>\n\n<p>As part of efforts to improve water safety, the Chairman distributed\n<strong>150 life jackets supplied by HYPPADEC</strong> to major boat\npoints, including Oweto, Adana, Abugbe, and other locations. He commended\nHYPPADEC for its support and urged boat operators and passengers to obey\nwater-safety rules and wear life jackets while travelling by water.</p>\n\n<p>The Chairman appealed to the National Emergency Management Agency\n(NEMA), Benue-SEMA, relevant government agencies, humanitarian\norganisations, and development partners to provide urgent assistance.\nPriority needs include relief supplies, food, shelter, medical assistance,\nand livelihood support for affected households.</p>\n\n<p>He was accompanied by nine ward councillors led by the Agatu Legislative\nCouncil Leader, Hon. Tony Simon, as well as the Supervisory Councillor\nfor Revenue, Hon. Danjuma Isah Halidu, and other council officials.</p>\n\n<p>The assessment was coordinated by the Executive Secretary of\nBenue-SEMA, Sir James Aondoakaa Iorpuu, PhD. The team was led by\nMr. Orseer Zege, Programme Manager for IDP Operations, who represented\nthe Executive Secretary alongside representatives of IOM and the Nigerian\nRed Cross.</p>\n\n<p>Mr. Zege expressed sympathy with the affected communities and explained\nthat the assessment findings would help establish the extent of the damage\nand guide intervention efforts. He added that Benue-SEMA was working with\nrelevant agencies and development partners to facilitate assistance.</p>\n\n<p>The visit highlighted the urgent needs of flood-affected riverine\ncommunities and the importance of coordinated humanitarian support,\ncommunity cooperation, and safe water transportation.</p>",
-        "image_file": "sema_river_visit.jpg",
-        "additional_images": [
-            "sema_river_visit_2.jpeg",
-            "sema_river_visit_3.jpeg",
-            "sema_river_visit_4.jpeg"
-        ],
-        "author": "Agatu LGA Media Office",
-        "created_at": "October 18, 2026",
-        "is_published": true
-    }
+  {
+    "slug": "benue-crs-launch-rapid-humanitarian-project",
+    "title": "Benue Government and CRS Launch RAPID Humanitarian Project",
+    "category": "Humanitarian Support",
+    "summary": "A 12-month humanitarian initiative announced by the Benue State Government and Catholic Relief Services will cover 19 communities across four local government areas, including Agatu.",
+    "content": "\n<p>The Benue State Government, in partnership with Catholic Relief Services\n(CRS) and other stakeholders, announced the Rapid Assistance for People\nImpacted by Disaster (RAPID) project in October 2026.</p>\n<p>The state government's announcement says the 12-month initiative covers\n19 communities across Gwer West, Agatu, Kwande and Logo local government\nareas. Planned intervention areas include food assistance, nutrition,\nwater, sanitation and hygiene, shelter, protection, disaster-risk reduction\nand community engagement.</p>\n<p>The announcement describes the project's intended scope. It does not\nconfirm that every service has already reached Agatu communities. Residents\nshould look for further implementation updates from the responsible agencies.</p>\n<p><strong>Source:</strong>\n<a href=\"https://mio.benuestate.gov.ng/news/benue-crs-launch-rapid-project-for-conflict-affected-communities\"\ntarget=\"_blank\" rel=\"noopener noreferrer\">Benue State Ministry of Information and Orientation</a>.\nPublished October 22, 2026.</p>\n",
+    "created_at": "October 22, 2026",
+    "author": "Agatu LGA News Desk",
+    "image_file": "default_news.jpg",
+    "id": 2,
+    "additional_images": [],
+    "is_published": false
+  },
+  {
+    "slug": "agatu-awards-contracts-for-three-asphalt-roads",
+    "title": "Agatu Council Awards Contracts for Three Asphalt Roads",
+    "category": "Infrastructure & Projects",
+    "summary": "A September report described contracts for the Oshigbudu–Atakpa, Market Square–Onchali and Adokpa–Och’Adogoji roads.",
+    "content": "\n<p>A report published on September 18, 2026, said the Agatu Local Government\nCouncil had awarded contracts to RCSY Construction Nigeria Limited for\nthree asphalt road projects.</p>\n<ul>\n<li>Oshigbudu–Atakpa Road</li>\n<li>Market Square–Onchali Road</li>\n<li>Adokpa–Och’Adogoji Road</li>\n</ul>\n<p>The report said work was expected to commence in the fourth week of\nSeptember. This article records the reported contract awards; it does not\nconfirm that construction has started, reached a particular stage or been\ncompleted. A newer, independently verified progress update is needed to\nestablish the current status.</p>\n<p><strong>Source:</strong>\n<a href=\"https://benue.today/ejeh-awards-contracts-for-three-asphalt-roads/\"\ntarget=\"_blank\" rel=\"noopener noreferrer\">Benue Today</a>.\nPublished September 18, 2026.</p>\n",
+    "created_at": "September 18, 2026",
+    "author": "Agatu LGA News Desk",
+    "image_file": "agatu_road_contracts.jpg",
+    "id": 3,
+    "additional_images": [],
+    "is_published": true
+  },
+  {
+    "slug": "agatu-state-team-inspects-school-and-road-projects",
+    "title": "State Team Inspects School Renovations and Road Project in Agatu",
+    "category": "Infrastructure & Projects",
+    "summary": "A July report described an inspection of classroom renovation work at RCM Primary School in Oweto and Ogbaulu and the Obagaji–Okokolo–Agagbe Road project.",
+    "content": "\n<p>According to a report published on July 1, 2026, a Benue State Government\nmonitoring team inspected projects in Agatu on June 30.</p>\n<p>The reported inspection covered classroom renovation work at RCM Primary\nSchool in Oweto and Ogbaulu, as well as the Obagaji–Okokolo–Agagbe Road\nproject.</p>\n<p>The report documents an inspection at that time. It does not establish\nwhether the works have since been completed or their current construction\nstatus.</p>\n<p><strong>Source:</strong>\n<a href=\"https://benue.today/agatu-council-chairman-hon-melvin-james-ejeh-commends-state-government-for-inspection-of-ongoing-projects/\"\ntarget=\"_blank\" rel=\"noopener noreferrer\">Benue Today</a>.\nPublished July 1, 2026.</p>\n",
+    "created_at": "July 01, 2026",
+    "author": "Agatu LGA News Desk",
+    "image_file": "agatu_school_road_inspection.jpg",
+    "id": 4,
+    "additional_images": [],
+    "is_published": true
+  },
+  {
+    "slug": "apa-agatu-town-hall-development-priorities",
+    "title": "Apa–Agatu Town Hall Highlights Development Priorities",
+    "category": "Community Engagement",
+    "summary": "Reporting on the August town hall meeting covered development priorities, including infrastructure and agricultural development.",
+    "content": "\n<p>Reports published on August 29, 2026, covered a town hall meeting\ninvolving the Benue State Government and stakeholders from the Apa–Agatu\narea. Topics included infrastructure and broader development priorities.</p>\n<p>This article summarizes the reported meeting and the priorities discussed.\nStatements made at a town hall should be understood as attributed statements\nor commitments, not independent confirmation that every proposed project\nhas been completed.</p>\n<p><strong>Sources:</strong>\n<a href=\"https://benue.today/benue-governor-highlights-development-projects-during-apa-agatu-town-hall-meeting/\"\ntarget=\"_blank\" rel=\"noopener noreferrer\">Benue Today</a>\nand\n<a href=\"https://dailypost.ng/2026/08/29/benue-alias-interventions-restoring-peace-accelerating-development-in-agatu/\"\ntarget=\"_blank\" rel=\"noopener noreferrer\">Daily Post</a>.\nPublished August 29, 2026.</p>\n",
+    "created_at": "August 29, 2026",
+    "author": "Agatu LGA News Desk",
+    "image_file": "apa_agatu_townhall.jpg",
+    "id": 5,
+    "additional_images": [],
+    "is_published": true
+  },
+  {
+    "id": 1,
+    "slug": "agatu-chairman-leads-sema-iom-red-cross-flood-assessment",
+    "title": "Agatu Chairman Leads SEMA, IOM and Red Cross in Assessment of 32 Flood-Affected Communities",
+    "category": "Disaster Relief & Public Safety",
+    "summary": "Agatu LGA Chairman Hon. Amb. James Melvin Ejeh appeals for urgent humanitarian assistance following a joint assessment of 32 flood-affected communities, alongside the distribution of 150 life jackets supplied by HYPPADEC.",
+    "content": "<p>The Executive Chairman of Agatu Local Government Area,\n<strong>Hon. Amb. James Melvin Ejeh</strong>, has appealed for urgent\nhumanitarian assistance for 32 communities reportedly affected by flooding.\nThe appeal was made on Sunday, October 18, 2026, when the Chairman received\na joint rapid assessment team from the Benue State Emergency Management\nAgency (Benue-SEMA), the International Organization for Migration (IOM),\nand the Nigerian Red Cross.</p>\n\n<p>The team visited to assess the impact of the flooding, identify urgent\nneeds, and help guide possible humanitarian interventions. The Chairman\nreceived the delegation alongside the community leaders of Oweto and\nUtugolugu, Chief Ibrahim Kwelono and Chief Sule Ajaka.</p>\n\n<p>Reports indicated that houses, farmlands, food supplies, and household\nitems had been damaged. These losses have raised concerns about shelter,\nfood security, and the livelihoods of affected residents.</p>\n\n<p>As part of efforts to improve water safety, the Chairman distributed\n<strong>150 life jackets supplied by HYPPADEC</strong> to major boat\npoints, including Oweto, Adana, Abugbe, and other locations. He commended\nHYPPADEC for its support and urged boat operators and passengers to obey\nwater-safety rules and wear life jackets while travelling by water.</p>\n\n<p>The Chairman appealed to the National Emergency Management Agency\n(NEMA), Benue-SEMA, relevant government agencies, humanitarian\norganisations, and development partners to provide urgent assistance.\nPriority needs include relief supplies, food, shelter, medical assistance,\nand livelihood support for affected households.</p>\n\n<p>He was accompanied by nine ward councillors led by the Agatu Legislative\nCouncil Leader, Hon. Tony Simon, as well as the Supervisory Councillor\nfor Revenue, Hon. Danjuma Isah Halidu, and other council officials.</p>\n\n<p>The assessment was coordinated by the Executive Secretary of\nBenue-SEMA, Sir James Aondoakaa Iorpuu, PhD. The team was led by\nMr. Orseer Zege, Programme Manager for IDP Operations, who represented\nthe Executive Secretary alongside representatives of IOM and the Nigerian\nRed Cross.</p>\n\n<p>Mr. Zege expressed sympathy with the affected communities and explained\nthat the assessment findings would help establish the extent of the damage\nand guide intervention efforts. He added that Benue-SEMA was working with\nrelevant agencies and development partners to facilitate assistance.</p>\n\n<p>The visit highlighted the urgent needs of flood-affected riverine\ncommunities and the importance of coordinated humanitarian support,\ncommunity cooperation, and safe water transportation.</p>",
+    "image_file": "sema_river_visit.jpg",
+    "additional_images": [
+      "sema_river_visit_2.jpeg",
+      "sema_river_visit_3.jpeg",
+      "sema_river_visit_4.jpeg"
+    ],
+    "author": "Agatu LGA Media Office",
+    "created_at": "October 18, 2026",
+    "is_published": true
+  }
 ]
