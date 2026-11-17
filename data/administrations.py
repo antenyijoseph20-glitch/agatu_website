@@ -47,7 +47,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 4,
-        "tenure": "0000 - 0000",
+        "tenure": "2022 - 2023",
         "chairman": "Hon. Peter Joseph Ngbede",
         "vice_chairman": "Hon. Suleiman Usman",
         "secretary": "Council Secretary",
@@ -59,7 +59,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 5,
-        "tenure": "0000 – 0000",
+        "tenure": "22-6-2020 – 2022",
         "chairman": "Hon. Suleiman Adoyi",
         "vice_chairman": "Elected Vice Chairman",
         "secretary": "Council Secretary",
@@ -71,8 +71,8 @@ ADMINISTRATIONS = [
     },
     {
         "id": 6,
-        "tenure": "0000 – 0000",
-        "chairman": "Usman Halilu",
+        "tenure": "25/6/2019 - 22/6/2020",
+        "chairman": "Hon Sule Usman Alilu",
         "vice_chairman": "Caretaker Vice Chairman",
         "secretary": "secretary",
         "type": "Caretaker Committee",
@@ -83,11 +83,23 @@ ADMINISTRATIONS = [
     },
     {
         "id": 7,
-        "tenure": "0000 – 0000",
-        "chairman": "Hon Alhaji Oyigocho",
+        "tenure": "13/6/2019 - 24/6/2019",
+        "chairman": "Hon Ogwuche Simon O.",
         "vice_chairman": "Elected Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Elected Executive Council",
+        "type": "DGSA Acting",
+        "status": "Acting",
+        "highlights": [
+            "Rural projects and local road repairs"
+        ]
+    },
+     {
+        "id": 8,
+        "tenure": "22/01/2019",
+        "chairman": "Hon Alhaji Oyigocho.",
+        "vice_chairman": "Elected Vice Chairman",
+        "secretary": "Council Secretary",
+        "type": "Caretaker Acting",
         "status": "Acting",
         "highlights": [
             "Rural projects and local road repairs"
@@ -95,8 +107,8 @@ ADMINISTRATIONS = [
     },
     {
         "id": 8,
-        "tenure": "0000 – 0000",
-        "chairman": "Hon Comfort Echoda",
+        "tenure": "13/6/2017 - 22/01/2019",
+        "chairman": "Hon Comfort A. Echoda",
         "vice_chairman": "Elected Vice Chairman",
         "secretary": "Council Secretary",
         "type": "Elected Executive Council",
@@ -107,20 +119,20 @@ ADMINISTRATIONS = [
     },
     {
         "id": 9,
-        "tenure": "0000 – 0000",
+        "tenure": "30/03/2017 - 13/6/2017",
         "chairman": "Hon Mohammed Audu",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Acting",
-        "status": "Acting",
+        "type": "DGSA Acting",
+        "status": "Sole Administration Acting",
         "highlights": [
             "Rural projects and local road repairs"
         ]
     },
     {
         "id": 10,
-        "tenure": "0000 - 0000",
-        "chairman": "Hon Michael Inalegwu",
+        "tenure": "13/10/2016 - 30/03/2027",
+        "chairman": "Hon Michael U. Inalegwu",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
         "type": "Sole Administration",
@@ -129,13 +141,37 @@ ADMINISTRATIONS = [
             "Rural projects and local road repairs"
         ]
     },
+     {
+        "id": 7,
+        "tenure": "13/07/2016 - 13/10/2016",
+        "chairman": "Hon Omeka Okpave.",
+        "vice_chairman": "Elected Vice Chairman",
+        "secretary": "Council Secretary",
+        "type": "DGSA Acting",
+        "status": "Acting",
+        "highlights": [
+            "Rural projects and local road repairs"
+        ]
+    },
     {
         "id": 11,
-        "tenure": "0000 – 0000",
+        "tenure": "6/7/2015 - 13/07/2016",
         "chairman": "Hon Joseph Ngbede",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Executive Council",
+        "type": "Caretaker Acting",
+        "status": "Acting",
+        "highlights": [
+            "Rural projects and local road repairs"
+        ]
+    },
+     {
+        "id": 7,
+        "tenure": "4/6/2015 - 8/7/2015",
+        "chairman": "Andrew Adanu Egwa.",
+        "vice_chairman": "Elected Vice Chairman",
+        "secretary": "Council Secretary",
+        "type": "DGSA Acting",
         "status": "Acting",
         "highlights": [
             "Rural projects and local road repairs"
@@ -143,8 +179,8 @@ ADMINISTRATIONS = [
     },
     {
         "id": 12,
-        "tenure": "0000 – 0000",
-        "chairman": "Hon Michelle Obiabo Ejekwote",
+        "tenure": "8/4/2015 - 3/6/2015",
+        "chairman": "Hon Michelle M Obiabo ",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
         "type": "Caretaker",
@@ -155,11 +191,11 @@ ADMINISTRATIONS = [
     },
     {
         "id": 13,
-        "tenure": "0000 – 0000",
-        "chairman": "Hon Egwa Andrew Adanu",
+        "tenure": "30/1/2015 - 9/4/2015",
+        "chairman": "Hon Andrew Adanu Egwa",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Sole Administration",
+        "type": "GDSA Sole Administration",
         "status": "Acting",
         "highlights": [
             "Rural projects and local road repairs"
@@ -167,7 +203,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 14,
-        "tenure": "0000 – 0000",
+        "tenure": "27/11/2012 - 27/11/2014",
         "chairman": "Hon Stephen Dutse",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -179,7 +215,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 15,
-        "tenure": "0000 – 0000",
+        "tenure": "19/12/2011 - 27/11/2012",
         "chairman": "Hon Momoh Auduh",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -191,7 +227,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 16,
-        "tenure": "0000 – 0000",
+        "tenure": "19/1/2011 - 19/12/2011",
         "chairman": "Hon Yusuf Ogbole",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -203,7 +239,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 17,
-        "tenure": "0000 – 0000",
+        "tenure": "4/1/2008 - 18/1/2011",
         "chairman": "Hon Mrs Owakoyi E Ongwatabo",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -215,7 +251,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 18,
-        "tenure": "0000 – 0000",
+        "tenure": "4/11/2007 - 4/11/2008",
         "chairman": "Hon Matthew Oyinu",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -227,7 +263,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 19,
-        "tenure": "0000 – 0000",
+        "tenure": "4/5/2007 - 4/11/2007",
         "chairman": "Hon Bawa Enogela",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -239,7 +275,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 20,
-        "tenure": "0000 – 0000",
+        "tenure": "4/4/2006 - 4/5/2007",
         "chairman": "Hon Godwin Abu Edoh",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -251,7 +287,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 21,
-        "tenure": "0000 – 0000",
+        "tenure": "30/3/2004 - 4/4/2006",
         "chairman": "Hon Danjuma Sule ",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -263,11 +299,11 @@ ADMINISTRATIONS = [
     },
     {
         "id": 22,
-        "tenure": "0000 – 0000",
+        "tenure": "20/2/2004 - 30/3/2004",
         "chairman": "Hon Lawrence Torkula",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Sole Administration",
+        "type": "Interim Sole Administration",
         "status": "Acting",
         "highlights": [
             "Rural projects and local road repairs"
@@ -275,7 +311,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 23,
-        "tenure": "0000 – 0000",
+        "tenure": "6/8/2003 - 20/2/2004",
         "chairman": "Hon Danjuma Sule",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -287,7 +323,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 24,
-        "tenure": "0000 – 0000",
+        "tenure": "29/5/2002 - 4/8/2003",
         "chairman": "Hon Aladan Ogebo",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -299,7 +335,7 @@ ADMINISTRATIONS = [
     },
     {
         "id": 25,
-        "tenure": "0000 – 0000",
+        "tenure": "29/5/1999 - 29/5/2002",
         "chairman": "Hon Michael Inalegwu",
         "vice_chairman": "Hon Joseph Usman Antenyi",
         "secretary": "Council Secretary",
@@ -309,9 +345,21 @@ ADMINISTRATIONS = [
             "Rural and local road repairs"
         ]
     },
+     {
+        "id": 7,
+        "tenure": "27/7/1998 - 29/5/1999",
+        "chairman": "Hon S.A.A Gbue.",
+        "vice_chairman": "Elected Vice Chairman",
+        "secretary": "Council Secretary",
+        "type": "DGSA Sole ADministation Acting",
+        "status": "Acting",
+        "highlights": [
+            "Rural projects and local road repairs"
+        ]
+    },
     {
         "id": 26,
-        "tenure": "0000 – 0000",
+        "tenure": "11/4/1997 -20/7/1998",
         "chairman": "Hon Alh. Momoh Audu",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
@@ -323,11 +371,11 @@ ADMINISTRATIONS = [
     },
     {
         "id": 12,
-        "tenure": "1996 – 1999 (Creation Era)",
+        "tenure": "11/12/1996 - 11/4/1997 (Creation Era)",
         "chairman": "Hon P. S Ngbede",
         "vice_chairman": "Vice Chairman",
         "secretary": "Council Secretary",
-        "type": "Caretaker",
+        "type": "Sole Administration Acting",
         "status": "Historical Era",
         "highlights": [
             "Establishment of Agatu LGA Secretariat in Obagaji following creation in October 1996"
