@@ -24,6 +24,7 @@
         <a href="{{ url_for('news_list') }}" class="btn btn-sm {% if not active_category %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">All News</a>
         <a href="{{ url_for('news_list', category='Executive Brief') }}" class="btn btn-sm {% if active_category == 'Executive Brief' %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">Executive Brief</a>
         <a href="{{ url_for('news_list', category='Disaster Relief & Public Safety') }}" class="btn btn-sm {% if active_category == 'Disaster Relief & Public Safety' %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">Disaster Relief</a>
+        <a href="{{ url_for('news_list', category='Security and Public Safety') }}" class="btn btn-sm {% if active_category == 'Security and Public Safety' %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">Security &amp; Public Safety</a>
         <a href="{{ url_for('news_list', category='Infrastructure & Projects') }}" class="btn btn-sm {% if active_category == 'Infrastructure & Projects' %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">Infrastructure</a>
         <a href="{{ url_for('news_list', category='Community Engagement') }}" class="btn btn-sm {% if active_category == 'Community Engagement' %}btn-success{% else %}btn-outline-secondary{% endif %} rounded-pill px-3">Community</a>
     </div>
@@ -38,6 +39,8 @@
                     <img src="{{ url_for('static', filename='images/' + news_img) }}"
                          class="card-img-top news-card-image"
                          alt="{{ item.title }}"
+                         loading="lazy"
+                         decoding="async"
                          onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/default_news.jpg') }}';">
                     <span class="position-absolute top-0 end-0 bg-success text-white fw-bold px-3 py-1 m-3 rounded-pill fs-7">
                         {{ item.category }}

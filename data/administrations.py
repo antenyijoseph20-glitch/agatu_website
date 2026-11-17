@@ -24,7 +24,7 @@ ADMINISTRATIONS = [
     {
         "id": 2,
         "tenure": "2023 – 2024",
-        "chairman": "Hon. Philip Ohi Ebenyaku",
+        "chairman": "Hon. Philip Ohi Ebenyakwu",
         "vice_chairman": "Hon Adole Jose Ehoda",
         "secretary": "Hon Friday Baba Idakwo",
         "type": "Caretaker Committee",
